@@ -1,0 +1,29 @@
+
+server:
+  port: 8080
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+backup:
+  folder: C://BackupNew/
+  extension: .txt
+
+amazonProperties:
+  endpointUrl: http://s3.console.aws.amazon.com/
+  accessKey: AKIAZJGJRQXU2JBD2FNK
+  secretKey: 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
+  bucketName: mybckt-tst
+  downloadpath: C:/Users/AVIGHNAV-PC/Downloads/S3/
+  downloadextension: txt
+
+?SSL: false
