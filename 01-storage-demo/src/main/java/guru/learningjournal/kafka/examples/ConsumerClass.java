@@ -32,7 +32,7 @@ public class ConsumerClass {
 		KafkaConsumer<Integer, String> consumer = createConsumer(consumerGroup);
 		consumeMessage(consumer, topicName);
 		}else {
-			System.out.println("Enter Topic name in IDE");
+			System.out.println("Enter Topic name in cxzIDE");
 			System.exit(0);
 		}
 
