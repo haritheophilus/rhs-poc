@@ -101,6 +101,8 @@ public class AmazonClient {
 	}
 
 	private void uploadFileTos3bucket(String fileName, File file) {
+		//s3client.createBucket("rhs-dem-abc-1", Region.AP_Mumbai);
+		
 		s3client.putObject(new PutObjectRequest(bucketName, fileName, file));
 	}
 

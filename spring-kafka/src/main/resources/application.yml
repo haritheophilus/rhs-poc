@@ -3,27 +3,35 @@ server:
   port: 8080
 spring:
   kafka:
+    properties:
+      sasl:
+        mechanism:  PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://rhs-azure-poc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cDipmFKjHLZORLEYjf2BKy3UUJY/RwxV+ZrTbatRYhU="
+      security:
+        protocol: SASL_SSL
     consumer:
-      bootstrap-servers: localhost:9092
-      group-id: group_id
+      bootstrap-servers: rhs-azure-poc.servicebus.windows.net:9093
+      group-id: rhs-azure-poc
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: rhs-azure-poc.servicebus.windows.net:9093
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 backup:
-  folder: C://BackupNew/
+  folder: E:\RHS-Git\rhs-poc\spring-kafka\BackupNew\
   extension: .txt
 
 amazonProperties:
   endpointUrl: http://s3.console.aws.amazon.com/
-  accessKey: AKIAZJGJRQXU2JBD2FNK
-  secretKey: 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
-  bucketName: mybckt-tst
-  downloadpath: C:/Users/AVIGHNAV-PC/Downloads/S3/
+  accessKey: AKIAZSZRA3KGDOVY4ZKI
+  secretKey: Xo5+tQGj25UmlFSOmGNaNXpJTKRv7XnS6RbPok/a
+  bucketName: sample-rhs-bucket
+  downloadpath: E:\RHS-Git\rhs-poc\spring-kafka\S3-Files
   downloadextension: txt
 
 ?SSL: false
+

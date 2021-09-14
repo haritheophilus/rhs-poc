@@ -1,22 +1,25 @@
 package com.example.springkafka.consumer;
 
-import com.example.springkafka.service.AmazonClient;
-import org.apache.tomcat.jni.Local;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.time.LocalDate;
+import com.example.springkafka.service.AmazonClient;
+import com.example.springkafka.service.AzureTestClient;
+import com.example.springkafka.service.RHSTestClient;
 
 @Service
 public class Consumer {
@@ -28,6 +31,12 @@ public class Consumer {
 
     @Autowired
     private AmazonClient amazonClient;
+    
+    @Autowired
+    private RHSTestClient rhsAwsClient;
+    
+    @Autowired
+    private AzureTestClient azureClient;
 
     @Value("${backup.folder}")
     private String backupFolder;
@@ -38,7 +47,7 @@ public class Consumer {
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
 
     @KafkaListener(topics = "rules.new", groupId = "group_id")
-    public void consume(String message) throws IOException {
+    public void consumeMultiple(String message) throws IOException {
         logger.info("<<<Consuming<<< {}", message);
         localDate = LocalDate.now().compareTo(localDate) > 0 ? LocalDate.now() : localDate;
         StringBuilder stringBuilder = new StringBuilder();
@@ -55,7 +64,7 @@ public class Consumer {
     }
 
     @KafkaListener(topics = {"rules.new", "rules.new1"}, groupId = "multiple-group")
-    public void consumeMultiple(@Payload String message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topicName) throws IOException{
+    public void consume(@Payload String message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topicName) throws IOException{
         logger.info("<<<Consuming<<< {}", message);
         localDate = LocalDate.now().compareTo(localDate) > 0 ? LocalDate.now() : localDate;
         StringBuilder stringBuilder = new StringBuilder();
@@ -68,6 +77,8 @@ public class Consumer {
         BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
         writer.append(message+"\n");
         writer.close();
-        amazonClient.uploadFile(file,localDate+":"+topicName);
+        rhsAwsClient.uploadFile(file, localDate+":"+topicName);
+        azureClient.uploadFile(file, localDate+":"+topicName);
+        //amazonClient.uploadFile(file,localDate+":"+topicName);
     }
 }
