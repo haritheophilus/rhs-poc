@@ -1,0 +1,33 @@
+
+server:
+  port: 8080
+spring:
+  kafka:
+    properties:
+      sasl:
+        mechanism:  PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://rhs-azure-poc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cDipmFKjHLZORLEYjf2BKy3UUJY/RwxV+ZrTbatRYhU=";
+      security:
+        protocol: SASL_SSL
+    consumer:
+      bootstrap-servers: rhs-azure-poc.servicebus.windows.net:9093
+      group-id: rhs-azure-poc
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: rhs-azure-poc.servicebus.windows.net:9093
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+backup:
+  extension: .txt
+
+AzureProperties:
+  endpointUrl: https://rhsblobstorage.blob.core.windows.net
+  accountKey: 2z2zTTIruoRq/iBkbwe+OyIPVrpHo3nNX5O0LEbWsmS/ucuOvu/B3lA/y7spoK2DQgnF4S79L2V4mFRsGHsNjg==
+  accountName: rhsblobstorage
+  blobContainerName: my-first-blob-container
+
+
