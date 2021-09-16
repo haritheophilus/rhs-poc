@@ -1,0 +1,10 @@
+server:  port: 9191  spring:  application:    name: MY-API-GATEWAY  cloud:    gateway:      routes:      - id: MY-UI-SERVICE        uri: lb://MY-UI-SERVICE        predicates:        - Path=/ui/**        filters:          - name: CircuitBreaker            args:              name: MY-UI-SERVICE              fallbackuri: forward:/uiServiceFallback      - id: PERSIST-MSG-SERVICE        uri: lb://PERSIST-MSG-SERVICE        predicates:        - Path=/msgsrv/**      - id: PUBLISH-MSG-SERVICE        uri: lb://PUBLISH-MSG-SERVICE        predicates:        - Path=/kafka/publish/**    
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
