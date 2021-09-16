@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,6 @@ import com.rhslearnings.app.ui.model.request.UserDetailsRequestModel;
 import com.rhslearnings.app.ui.model.response.ErrorMessages;
 import com.rhslearnings.app.ui.model.response.UserRest;
 
-
 @RestController
 @RequestMapping("users")
 public class UserController {
@@ -43,22 +41,36 @@ public class UserController {
 		return response;
 	}
 
-	@PostMapping(consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	
-	public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) throws UserServiceException {
+	private UserRest login(UserDetailsRequestModel userDetails) {
 
 		if (userDetails.getLastName().isEmpty()) {
 			throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELDS.getErrorMessage());
 		}
-
 		UserDto userdto = new UserDto();
 		BeanUtils.copyProperties(userDetails, userdto);
 		userdto.setEncryptedPassword(userDetails.getPassword());
 		UserDto createduser = userService.createUser(userdto);
 		UserRest response = new UserRest();
 		BeanUtils.copyProperties(createduser, response);
+
 		return response;
+
+	}
+
+	@PostMapping(consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+	public String createHtmlUser(UserDetailsRequestModel userDetails) {
+		System.out.println("Form Encoded method: Got the details");
+
+		System.out.println("Form Encoded method: Need to persist in DB");
+
+		return userDetails.getFirstName();// login(userDetails).getUserId();
+	}
+
+	@PostMapping(consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+	public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) throws UserServiceException {
+
+		return login(userDetails);
 	}
 
 	@PutMapping(path = "/{id}", consumes = { MediaType.APPLICATION_XML_VALUE,
@@ -76,21 +88,19 @@ public class UserController {
 		return response;
 	}
 
-	@DeleteMapping(path = "/{id}", produces = { MediaType.APPLICATION_XML_VALUE,
-			MediaType.APPLICATION_JSON_VALUE })
+	@DeleteMapping(path = "/{id}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public String deleteUser(@PathVariable String id) {
 		userService.deleteUser(id);
 		return "Successfully deleted user: " + id;
 	}
-	
-	@GetMapping(produces = { MediaType.APPLICATION_XML_VALUE,
-			MediaType.APPLICATION_JSON_VALUE })
-	public List<UserRest> getUsers(@RequestParam(value = "page", defaultValue = "0") int page, 
+
+	@GetMapping(produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+	public List<UserRest> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "limit", defaultValue = "25") int limit) {
 		List<UserRest> users = new ArrayList<UserRest>();
-		
+
 		List<UserDto> listOfUsers = userService.getUsers(page, limit);
-		for(UserDto userDto : listOfUsers) {
+		for (UserDto userDto : listOfUsers) {
 			UserRest userRest = new UserRest();
 			BeanUtils.copyProperties(userDto, userRest);
 			users.add(userRest);

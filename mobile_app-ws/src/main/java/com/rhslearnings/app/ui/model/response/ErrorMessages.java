@@ -2,7 +2,7 @@ package com.rhslearnings.app.ui.model.response;
 
 public enum ErrorMessages {
 	
-	MISSING_REQUIRED_FIELDS("Missing reqired field. Please refer to the documentation"), 
+	MISSING_REQUIRED_FIELDS("Missing required field. Please refer to the documentation"), 
 	RECORD_ALREADY_EXISTS("The record already exists"),
 	INTERNAL_SERVER_ERROR("Internal Server Error"),
 	NO_RECORD_FOUND("Record with the given details is not found"),

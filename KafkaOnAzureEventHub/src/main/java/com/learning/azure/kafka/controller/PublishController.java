@@ -11,28 +11,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.azure.kafka.producer.Producer;
 
-
 @RestController
 @RequestMapping("kafka")
 public class PublishController {
-    //Request to produce record
-    private final Producer producer;
+	// Request to produce record
+	private final Producer producer;
 
-    @Autowired
-    PublishController(Producer producer){
-        this.producer = producer;
-    }
+	@Autowired
+	PublishController(Producer producer) {
+		this.producer = producer;
+	}
 
-    @PostMapping(value = "/publish", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-    public void sendMessageToKafka(@RequestParam("message") String message){
-        this.producer.sendMessage(message);
-    }
+	@GetMapping(value = "/publish")
+	public String sendMessageToKafkaFromUI(@RequestParam("message") String message) {
+		this.producer.sendMessage(message);
+		return "Message Sent";
+	}
 
-    @GetMapping(value = "/check")
-    @ResponseBody
-    public String checkApp(){
-        return "Mike Testing";
-    }
-    
+	@PostMapping(value = "/publish", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+	public void sendMessageToKafka(@RequestParam("message") String message) {
+		this.producer.sendMessage(message);
+	}
+
+	@GetMapping(value = "/check")
+	public String checkApp() {
+		return "Mike Testing";
+	}
+
 }
-
