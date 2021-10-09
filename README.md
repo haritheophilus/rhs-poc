@@ -38,10 +38,10 @@ a.	@TODO: As of now, we can still access the microservices without using API gat
 
 **Project Details	Oct.09.2021**
 
-Kafka-Streams:
+**Kafka-Streams:**
 1.	cardservices-jason-producer 
 2.	kafkastreams
-Kafka-Client API:
+**Kafka-Client API:**
 1.	rhs-kafka-on-azure-consumer
 2.	rhs-kafka-on-azure
 3.	mongodb
