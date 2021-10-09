@@ -1,0 +1,19 @@
+spring:
+  kafka:
+    bootstrap-servers: rhseventhub.servicebus.windows.net:9093
+    client-id: rhs-app
+    #consumer:
+   #   group-id: $Default
+  #    properties:
+    #    spring.json:
+     #     use.type.headers:false
+    properties:
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://rhseventhub.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=P2HmcgQyudcIvnC/2i192PQrKHV+L4bH2ttI0nas0Co=";
+      sasl.mechanism: PLAIN
+      security.protocol: SASL_SSL
+    template: 
+      default-topic: demoprod
+    producer:
+      value-serializer: com.rhslearnings.kafkaonazure.model.ProducerMessageSerializer
+topic:
+  name: demoprod

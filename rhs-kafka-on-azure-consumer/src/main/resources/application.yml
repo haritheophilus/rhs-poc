@@ -1,0 +1,26 @@
+server:
+  port: 9001
+spring:
+  kafka:
+    properties:
+      sasl:
+        mechanism:  PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://rhseventhub.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=P2HmcgQyudcIvnC/2i192PQrKHV+L4bH2ttI0nas0Co=";
+      security:
+        protocol: SASL_SSL
+    consumer:
+      bootstrap-servers: rhseventhub.servicebus.windows.net:9093
+      group-id: rhseventhub
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: com.rhslearnings.kafkaconsumer.model.ConsumerMessageSerializer
+    producer:
+      bootstrap-servers: localhost:9093
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.rhslearnings.kafkaonazure.model.ProducerMessageSerializer
+
+consumertopic:
+  name: demoprod
+publishertopic:
+  name: txn-invoice
