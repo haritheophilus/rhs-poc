@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "javaType": "com.rhslearnings.kafka.json.producer.data.model.CardInfo",
+  "properties": {
+      "EventType": {"type": "string"},
+      "CustomerId": {"type": "number"},
+      "ContactNumber": {"type": "number"},
+      "EmailId":{"type": "string"}
+      }
+}

@@ -1,0 +1,21 @@
+spring:
+   cloud:
+      stream:
+         bindings:
+            input-channel-1:
+               destination: cardservices
+            output-channel-1:
+               destination: banksolutions
+         kafka:
+            streams:
+               binder:
+                  appplicationId: demostreams
+                  brokers: localhost:8092
+ #              bindings: 
+#               input-channel-1:
+#                  consumer:
+#                     valueSerde: io.confluent.kafka.streams.serdes.json.KafkaJsonSchemaSerde
+#               output-channel-1:
+#                  producer:
+#                     valueSerde: io.confluent.kafka.streams.serdes.json.KafkaJsonSchemaSerde
+                     
