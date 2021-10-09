@@ -1,4 +1,4 @@
-**Project Details	9/16/2021**
+**Project Details	Sept.16.2021**
 
 a.	01-storage-demo :
 This project has a sample Java code to produce and consume messages to/from Kafka.
@@ -36,7 +36,7 @@ b.	The same is notified on the UI.
 6.	API Gateway is single point of entry to access these services
 a.	@TODO: As of now, we can still access the microservices without using API gateway. Such access must be restricted.
 
-**Project Details	10/09/2021**
+**Project Details	Oct.09.2021**
 
 Kafka-Streams:
 1.	cardservices-jason-producer 
