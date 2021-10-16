@@ -1,0 +1,740 @@
+[
+	{
+		"header": {
+			"id": "529235AC-D1BF-490B-BF88-006B4DF19290",
+			"organization": {
+				"type": "DUNS",
+				"value": "11-222-3333"
+			},
+			"eventType": "Card",
+			"eventCode": "New",
+			"operationType": "Add",
+			"eventDateTime": "2021-03-05T13:49:14Z",
+			"eventVersion": "1.0.0",
+			"isRepublished": false,
+			"originalEventId": "",
+			"linkedEventId": "",
+			"publisher": {
+				"id": "Instance-identifier-1234",
+				"name": "Portico",
+				"channel": "Mobile",
+				"device": {
+					"OS": "Android",
+					"OSVersion": "10",
+					"location": {
+						"latitude": "-28.7571",
+						"longitude": "81.3509"
+					},
+					"IPAddress": "101.23.245.4",
+					"uniqueIdentifier": "5166591B-8070-4870-B2D4-3469A68BEEA9",
+					"serialNumber": "E724F885-8F68-4E7D-BB86-C46A32696DDA"
+				}
+			},
+			"encryption": [
+				{
+					"field": "$.data.identity.cardNumber",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.number",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.accounts[*].number",
+					"encryptType": "GenericText_Trailing4_Internal"
+				},
+				{
+					"field": "$.data.card.previousCard.number",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.party.taxNumber",
+					"encryptType": "SSN_Internal"
+				}
+			]
+		},
+		"data": {
+			"identity": {
+				"cardNumber": "7897535F577D45C5",
+				"emailAddress": "email@address.com",
+				"partyNumber": "1234567890",
+				"phone": {
+					"countryCode": "1",
+					"number": "407-111-2222",
+					"extension": ""
+				}
+			},
+			"card": {
+				"number": "7897535F577D45C5",
+				"sequenceNumber": "",
+				"type": "Debit",
+				"status": "Active",
+				"detailStatus": "Active",
+				"nickname": "My Debit Card",
+				"description": "Gold Visa Debit",
+				"expiration": "12-2024",
+				"embossedNameOne": "MICHAEL B SMITH",
+				"embossedNameTwo": "",
+				"issuedDate": "2021-01-11",
+				"ISO": "111111",
+				"limitStrategyCode": "55555",
+				"openDate": "2021-01-11",
+				"closedDate": "",
+				"isPrimaryOwner": true,
+				"productIdentification": "12345",
+				"rewardsProgramNumber": "",
+				"portfolioNumber": "",
+				"lastUpdateDateTime": "2021-01-11T13:49:14Z",
+				"lastActivityDateTime": "2021-01-11T13:49:14Z",
+				"reissueDate": "",
+				"priorExpiration": "",
+				"statusChangeDateTime": "2021-01-11T13:49:14Z",
+				"activatedDate": "2021-01-11",
+				"activatedChannel": "Online",
+				"pinOffset": "1234",
+				"language": "en",
+				"issuedCount": 2,
+				"isReissued": false,
+				"isPersonal": true,
+				"isAUSEnabled": false,
+				"isInstantIssue": false,
+				"accounts": [
+					{
+						"number": "1819CEBB",
+						"detailType": "Checking",
+						"isActive": true,
+						"sequenceNumber": 1,
+						"transactionRestrictions": [
+							"Credit",
+							"CrossTransfer"
+						],
+						"nickname": "My Checking"
+					}
+				],
+				"address": [
+					{
+						"reference": {
+							"type": "Card",
+							"number": "Address-Record-Id-82426"
+						}
+					}
+				],
+				"fees": [
+					{
+						"type": "Annual",
+						"amount": 0,
+						"description": "Annual fee",
+						"isWaived": true,
+						"lastWaivedDate": "2021-01-11",
+						"nextAssessmentDate": "2022-01-11"
+					}
+				],
+				"image": [
+					{
+						"type": "Stock",
+						"value": "123"
+					}
+				],
+				"industryLocks": [
+					{
+						"type": "NAICS",
+						"code": "123",
+						"subCode": "456",
+						"fromDate": "2021-01-11",
+						"toDate": "2021-06-01"
+					}
+				],
+				"limits": [
+					{
+						"type": "Transaction",
+						"source": "ATM",
+						"action": "Withdrawal",
+						"amount": 100,
+						"count": 0,
+						"isOnline": true,
+						"fromDate": "",
+						"toDate": ""
+					}
+				],
+				"order": [
+					{
+						"type": "New",
+						"count": 1,
+						"isExpedited": false,
+						"deliveryAddress": {
+							"lineOne": "123 The Street",
+							"lineTwo": "",
+							"city": "Orlando",
+							"stateProvince": "Florida",
+							"country": "USA",
+							"postalCode": "32746"
+						}
+					},
+					{
+						"type": "PinMailer",
+						"count": 1,
+						"isExpedited": false,
+						"deliveryAddress": {
+							"lineOne": "123 The Street",
+							"lineTwo": "",
+							"city": "Orlando",
+							"stateProvince": "Florida",
+							"country": "USA",
+							"postalCode": "32746"
+						}
+					}
+				],
+				"party": {
+					"number": "1234567890",
+					"preferredContactMethod": "Phone",
+					"taxNumberType": "SSN",
+					"taxNumber": "8D9F7441A",
+					"birthDate": "2000-01-11",
+					"firstName": "Michael",
+					"middleName": "B",
+					"lastName": "Smith",
+					"prefix": "Mr.",
+					"suffix": "",
+					"businessName": "",
+					"email": [
+						{
+							"type": "Personal",
+							"address": "email@address.com",
+							"isContactAllowed": true,
+							"isPreferred": true
+						}
+					],
+					"phone": [
+						{
+							"type": "Mobile",
+							"countryCode": "001",
+							"number": "407-111-2222",
+							"extension": "",
+							"isContactAllowed": true,
+							"isPreferred": true
+						}
+					]
+				},
+				"previousCard": {
+					"number": "6E1E01B0F2B24CA7",
+					"expiration": "12-22",
+					"sequenceNumber": "",
+					"type": "Debit",
+					"detailStatus": "Inactive",
+					"issuedDate": "2021-01-11",
+					"isAUSEnabled": true
+				},
+				"security": {
+					"type": "ReferenceCode",
+					"value": "ABCDEFGHIJKLMNOPQRS"
+				},
+				"travelAlerts": [
+					{
+						"countryCode": "GB",
+						"fromDate": "2021-03-01",
+						"toDate": "2021-03-15"
+					}
+				],
+				"usage": {
+					"type": "ATM",
+					"frequency": "Daily",
+					"action": "Withdrawal",
+					"count": 2,
+					"lastDateTime": "2021-01-11T13:49:14Z"
+				}
+			}
+		}
+	},
+	{
+		"header": {
+			"id": "529235AC-D1BF-490B-BF88-006B4DF19290",
+			"organization": {
+				"type": "DUNS",
+				"value": "11-222-3333"
+			},
+			"eventType": "Card",
+			"eventCode": "New",
+			"operationType": "Add",
+			"eventDateTime": "2021-03-05T13:49:14Z",
+			"eventVersion": "1.0.0",
+			"isRepublished": false,
+			"originalEventId": "",
+			"linkedEventId": "",
+			"publisher": {
+				"id": "Instance-identifier-1234",
+				"name": "Portico",
+				"channel": "Mobile",
+				"device": {
+					"OS": "Android",
+					"OSVersion": "10",
+					"location": {
+						"latitude": "-28.7571",
+						"longitude": "81.3509"
+					},
+					"IPAddress": "101.23.245.4",
+					"uniqueIdentifier": "5166591B-8070-4870-B2D4-3469A68BEEA9",
+					"serialNumber": "E724F885-8F68-4E7D-BB86-C46A32696DDA"
+				}
+			},
+			"encryption": [
+				{
+					"field": "$.data.identity.cardNumber",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.number",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.accounts[*].number",
+					"encryptType": "GenericText_Trailing4_Internal"
+				},
+				{
+					"field": "$.data.card.previousCard.number",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.party.taxNumber",
+					"encryptType": "SSN_Internal"
+				}
+			]
+		},
+		"data": {
+			"identity": {
+				"cardNumber": "7897535C545G24D6",
+				"emailAddress": "test1@finserv.com",
+				"partyNumber": "1234567890",
+				"phone": {
+					"countryCode": "1",
+					"number": "305-777-6546",
+					"extension": ""
+				}
+			},
+			"card": {
+				"number": "7897535C545G24D6",
+				"sequenceNumber": "",
+				"type": "Debit",
+				"status": "Active",
+				"detailStatus": "Active",
+				"nickname": "My Debit Card",
+				"description": "Gold Visa Debit",
+				"expiration": "12-2024",
+				"embossedNameOne": "MICHAEL B SMITH",
+				"embossedNameTwo": "",
+				"issuedDate": "2021-01-11",
+				"ISO": "111111",
+				"limitStrategyCode": "55555",
+				"openDate": "2021-01-11",
+				"closedDate": "",
+				"isPrimaryOwner": true,
+				"productIdentification": "12345",
+				"rewardsProgramNumber": "",
+				"portfolioNumber": "",
+				"lastUpdateDateTime": "2021-01-11T13:49:14Z",
+				"lastActivityDateTime": "2021-01-11T13:49:14Z",
+				"reissueDate": "",
+				"priorExpiration": "",
+				"statusChangeDateTime": "2021-01-11T13:49:14Z",
+				"activatedDate": "2021-01-11",
+				"activatedChannel": "Online",
+				"pinOffset": "1234",
+				"language": "en",
+				"issuedCount": 2,
+				"isReissued": false,
+				"isPersonal": true,
+				"isAUSEnabled": false,
+				"isInstantIssue": false,
+				"accounts": [
+					{
+						"number": "1819CEBB",
+						"detailType": "Checking",
+						"isActive": true,
+						"sequenceNumber": 1,
+						"transactionRestrictions": [
+							"Credit",
+							"CrossTransfer"
+						],
+						"nickname": "My Checking"
+					}
+				],
+				"address": [
+					{
+						"reference": {
+							"type": "Card",
+							"number": "Address-Record-Id-82426"
+						}
+					}
+				],
+				"fees": [
+					{
+						"type": "Annual",
+						"amount": 0,
+						"description": "Annual fee",
+						"isWaived": true,
+						"lastWaivedDate": "2021-01-11",
+						"nextAssessmentDate": "2022-01-11"
+					}
+				],
+				"image": [
+					{
+						"type": "Stock",
+						"value": "123"
+					}
+				],
+				"industryLocks": [
+					{
+						"type": "NAICS",
+						"code": "123",
+						"subCode": "456",
+						"fromDate": "2021-01-11",
+						"toDate": "2021-06-01"
+					}
+				],
+				"limits": [
+					{
+						"type": "Transaction",
+						"source": "ATM",
+						"action": "Withdrawal",
+						"amount": 100,
+						"count": 0,
+						"isOnline": true,
+						"fromDate": "",
+						"toDate": ""
+					}
+				],
+				"order": [
+					{
+						"type": "New",
+						"count": 1,
+						"isExpedited": false,
+						"deliveryAddress": {
+							"lineOne": "123 The Street",
+							"lineTwo": "",
+							"city": "Orlando",
+							"stateProvince": "Florida",
+							"country": "USA",
+							"postalCode": "32746"
+						}
+					},
+					{
+						"type": "PinMailer",
+						"count": 1,
+						"isExpedited": false,
+						"deliveryAddress": {
+							"lineOne": "123 The Street",
+							"lineTwo": "",
+							"city": "Orlando",
+							"stateProvince": "Florida",
+							"country": "USA",
+							"postalCode": "32746"
+						}
+					}
+				],
+				"party": {
+					"number": "1234567890",
+					"preferredContactMethod": "Phone",
+					"taxNumberType": "SSN",
+					"taxNumber": "8D9F7441A",
+					"birthDate": "2000-01-11",
+					"firstName": "Michael",
+					"middleName": "B",
+					"lastName": "Smith",
+					"prefix": "Mr.",
+					"suffix": "",
+					"businessName": "",
+					"email": [
+						{
+							"type": "Personal",
+							"address": "test1@finserv.com",
+							"isContactAllowed": true,
+							"isPreferred": true
+						}
+					],
+					"phone": [
+						{
+							"type": "Mobile",
+							"countryCode": "001",
+							"number": "305-777-6546",
+							"extension": "",
+							"isContactAllowed": true,
+							"isPreferred": true
+						}
+					]
+				},
+				"previousCard": {
+					"number": "6E1E01B0F2B24CA7",
+					"expiration": "12-22",
+					"sequenceNumber": "",
+					"type": "Debit",
+					"detailStatus": "Inactive",
+					"issuedDate": "2021-01-11",
+					"isAUSEnabled": true
+				},
+				"security": {
+					"type": "ReferenceCode",
+					"value": "ABCDEFGHIJKLMNOPQRS"
+				},
+				"travelAlerts": [
+					{
+						"countryCode": "GB",
+						"fromDate": "2021-03-01",
+						"toDate": "2021-03-15"
+					}
+				],
+				"usage": {
+					"type": "ATM",
+					"frequency": "Daily",
+					"action": "Withdrawal",
+					"count": 2,
+					"lastDateTime": "2021-01-11T13:49:14Z"
+				}
+			}
+		}
+	},
+	{
+		"header": {
+			"id": "529235AC-D1BF-490B-BF88-006B4DF19290",
+			"organization": {
+				"type": "DUNS",
+				"value": "11-222-3333"
+			},
+			"eventType": "Card",
+			"eventCode": "New",
+			"operationType": "Add",
+			"eventDateTime": "2021-03-05T13:49:14Z",
+			"eventVersion": "1.0.0",
+			"isRepublished": false,
+			"originalEventId": "",
+			"linkedEventId": "",
+			"publisher": {
+				"id": "Instance-identifier-1234",
+				"name": "Portico",
+				"channel": "Mobile",
+				"device": {
+					"OS": "Android",
+					"OSVersion": "10",
+					"location": {
+						"latitude": "-28.7571",
+						"longitude": "81.3509"
+					},
+					"IPAddress": "101.23.245.4",
+					"uniqueIdentifier": "5166591B-8070-4870-B2D4-3469A68BEEA9",
+					"serialNumber": "E724F885-8F68-4E7D-BB86-C46A32696DDA"
+				}
+			},
+			"encryption": [
+				{
+					"field": "$.data.identity.cardNumber",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.number",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.accounts[*].number",
+					"encryptType": "GenericText_Trailing4_Internal"
+				},
+				{
+					"field": "$.data.card.previousCard.number",
+					"encryptType": "Card_Internal"
+				},
+				{
+					"field": "$.data.card.party.taxNumber",
+					"encryptType": "SSN_Internal"
+				}
+			]
+		},
+		"data": {
+			"identity": {
+				"cardNumber": "7897536A323B12C1",
+				"emailAddress": "test2@finserv.com",
+				"partyNumber": "1234567890",
+				"phone": {
+					"countryCode": "1",
+					"number": "218-546-8254",
+					"extension": ""
+				}
+			},
+			"card": {
+				"number": "7897536A323B12C1",
+				"sequenceNumber": "",
+				"type": "Debit",
+				"status": "Active",
+				"detailStatus": "Active",
+				"nickname": "My Debit Card",
+				"description": "Gold Visa Debit",
+				"expiration": "12-2024",
+				"embossedNameOne": "MICHAEL B SMITH",
+				"embossedNameTwo": "",
+				"issuedDate": "2021-01-11",
+				"ISO": "111111",
+				"limitStrategyCode": "55555",
+				"openDate": "2021-01-11",
+				"closedDate": "",
+				"isPrimaryOwner": true,
+				"productIdentification": "12345",
+				"rewardsProgramNumber": "",
+				"portfolioNumber": "",
+				"lastUpdateDateTime": "2021-01-11T13:49:14Z",
+				"lastActivityDateTime": "2021-01-11T13:49:14Z",
+				"reissueDate": "",
+				"priorExpiration": "",
+				"statusChangeDateTime": "2021-01-11T13:49:14Z",
+				"activatedDate": "2021-01-11",
+				"activatedChannel": "Online",
+				"pinOffset": "1234",
+				"language": "en",
+				"issuedCount": 2,
+				"isReissued": false,
+				"isPersonal": true,
+				"isAUSEnabled": false,
+				"isInstantIssue": false,
+				"accounts": [
+					{
+						"number": "1819CEBB",
+						"detailType": "Checking",
+						"isActive": true,
+						"sequenceNumber": 1,
+						"transactionRestrictions": [
+							"Credit",
+							"CrossTransfer"
+						],
+						"nickname": "My Checking"
+					}
+				],
+				"address": [
+					{
+						"reference": {
+							"type": "Card",
+							"number": "Address-Record-Id-82426"
+						}
+					}
+				],
+				"fees": [
+					{
+						"type": "Annual",
+						"amount": 0,
+						"description": "Annual fee",
+						"isWaived": true,
+						"lastWaivedDate": "2021-01-11",
+						"nextAssessmentDate": "2022-01-11"
+					}
+				],
+				"image": [
+					{
+						"type": "Stock",
+						"value": "123"
+					}
+				],
+				"industryLocks": [
+					{
+						"type": "NAICS",
+						"code": "123",
+						"subCode": "456",
+						"fromDate": "2021-01-11",
+						"toDate": "2021-06-01"
+					}
+				],
+				"limits": [
+					{
+						"type": "Transaction",
+						"source": "ATM",
+						"action": "Withdrawal",
+						"amount": 100,
+						"count": 0,
+						"isOnline": true,
+						"fromDate": "",
+						"toDate": ""
+					}
+				],
+				"order": [
+					{
+						"type": "New",
+						"count": 1,
+						"isExpedited": false,
+						"deliveryAddress": {
+							"lineOne": "123 The Street",
+							"lineTwo": "",
+							"city": "Orlando",
+							"stateProvince": "Florida",
+							"country": "USA",
+							"postalCode": "32746"
+						}
+					},
+					{
+						"type": "PinMailer",
+						"count": 1,
+						"isExpedited": false,
+						"deliveryAddress": {
+							"lineOne": "123 The Street",
+							"lineTwo": "",
+							"city": "Orlando",
+							"stateProvince": "Florida",
+							"country": "USA",
+							"postalCode": "32746"
+						}
+					}
+				],
+				"party": {
+					"number": "1234567890",
+					"preferredContactMethod": "Phone",
+					"taxNumberType": "SSN",
+					"taxNumber": "8D9F7441A",
+					"birthDate": "2000-01-11",
+					"firstName": "Michael",
+					"middleName": "B",
+					"lastName": "Smith",
+					"prefix": "Mr.",
+					"suffix": "",
+					"businessName": "",
+					"email": [
+						{
+							"type": "Personal",
+							"address": "test2@finserv.com",
+							"isContactAllowed": true,
+							"isPreferred": false
+						}
+					],
+					"phone": [
+						{
+							"type": "Mobile",
+							"countryCode": "001",
+							"number": "218-546-8254",
+							"extension": "",
+							"isContactAllowed": true,
+							"isPreferred": true
+						}
+					]
+				},
+				"previousCard": {
+					"number": "6E1E01B0F2B24CA7",
+					"expiration": "12-22",
+					"sequenceNumber": "",
+					"type": "Debit",
+					"detailStatus": "Inactive",
+					"issuedDate": "2021-01-11",
+					"isAUSEnabled": true
+				},
+				"security": {
+					"type": "ReferenceCode",
+					"value": "ABCDEFGHIJKLMNOPQRS"
+				},
+				"travelAlerts": [
+					{
+						"countryCode": "GB",
+						"fromDate": "2021-03-01",
+						"toDate": "2021-03-15"
+					}
+				],
+				"usage": {
+					"type": "ATM",
+					"frequency": "Daily",
+					"action": "Withdrawal",
+					"count": 2,
+					"lastDateTime": "2021-01-11T13:49:14Z"
+				}
+			}
+		}
+	}
+]

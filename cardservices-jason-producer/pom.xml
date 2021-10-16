@@ -54,11 +54,10 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			 <!-- Json Schema to POJO plugin-->
+			 <!-- Json Schema to POJO plugin
             <plugin>
                 <groupId>org.jsonschema2pojo</groupId>
                 <artifactId>jsonschema2pojo-maven-plugin</artifactId>
-               <!--  <version>0.5.1</version> -->
                 <executions>
                     <execution>
                         <goals>
@@ -73,7 +72,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 		</plugins>
 	</build>
 

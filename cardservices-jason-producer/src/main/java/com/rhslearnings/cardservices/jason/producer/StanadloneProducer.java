@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
+import com.finserv.data.model.CardV11;
 import com.rhslearnings.kafka.json.producer.data.model.CardInfo;
 
 public class StanadloneProducer {
@@ -22,7 +23,7 @@ public class StanadloneProducer {
 	public static void main(String[] args) {
 		
 		String topicName = "cardservices";
-		int noOfProducers = 2;
+		int noOfProducers = 1;
 		int produceSpeed = 3000;//milli-sec
 
 		Properties properties = new Properties();
@@ -31,7 +32,7 @@ public class StanadloneProducer {
 		properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,JsonSerializer.class);
 
-		KafkaProducer<String, CardInfo> kafkaProducer = new KafkaProducer<>(properties);
+		KafkaProducer<String, CardV11> kafkaProducer = new KafkaProducer<>(properties);
 		ExecutorService executor = Executors.newFixedThreadPool(noOfProducers);
 		final List<RunnableProducer> runnableProducers = new ArrayList<>();
 
