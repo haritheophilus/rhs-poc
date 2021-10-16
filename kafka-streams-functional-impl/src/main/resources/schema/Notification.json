@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "javaType": "com.rhs.example.kafkastreams.data.model.Notification",
+  "properties": {
+      "EventType": {"type": "string"},
+      "CustomerId": {"type": "number"},
+      "ModifiedContactNumber": {"type": "number"},
+      "ModifiedEmailId":{"type": "string"}
+      }
+}

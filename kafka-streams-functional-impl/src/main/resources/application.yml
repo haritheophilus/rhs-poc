@@ -1,0 +1,17 @@
+spring:
+   cloud:
+      function:
+         definition: process;listen
+      stream:
+         bindings:
+            process-in-0:
+               destination: cardservices
+            process-out-0:
+               destination: banksolutions
+            listen-in-0:
+               destination: banksolutions
+         kafka:
+            streams:
+               binder:
+                  appplicationId: demostreams
+                  brokers: localhost:8092
