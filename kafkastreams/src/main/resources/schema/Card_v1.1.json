@@ -1,0 +1,1238 @@
+{
+  "$id": "http://api.onefiserv.net/card/v1/Card.json",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "version": "1.1",
+  "description": "This event is generated when Card related data is added, changed or deleted.",
+  "required": [
+    "header",
+    "data"
+  ],
+  "type": "object",
+  "properties": {
+    "header": {
+      "$ref": "#/definitions/header"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "card": {
+          "$ref": "#/definitions/card"
+        }
+      },
+      "required": [
+        "card"
+      ]
+    }
+  },
+  "definitions": {
+    "header": {
+      "type": "object",
+      "description": "Object that contains the data pertaining to the event that was triggered",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Generic identifier that contains no sensitive data and represents a unique value for the event being presented"
+        },
+        "organization": {
+          "$ref": "#/definitions/headerOrganization"
+        },
+        "eventType": {
+          "type": "string",
+          "description": "Indicates the type of event",
+          "enum": [
+            "Card"
+          ]
+        },
+        "eventCode": {
+          "type": "string",
+          "description": "Further classifies the eventType",
+          "enum": [
+            "Activate",
+            "Address",
+            "Email",
+            "Limits",
+            "New",
+            "Party",
+            "Phone",
+            "PinMailer",
+            "PinOffset",
+            "PinTryReset",
+            "Reissue",
+            "Relationship",
+            "Replacement",
+            "Security",
+            "Status"
+          ]
+        },
+        "operationType": {
+          "type": "string",
+          "description": "Indicates the type of change",
+          "enum": [
+            "Add",
+            "Update"
+          ]
+        },
+        "eventDateTime": {
+          "type": "string",
+          "description": "Date/time when change occured",
+          "format": "date-time"
+        },
+        "eventVersion": {
+          "type": "string",
+          "description": "Version of the event (starts at \"1.0.\")"
+        },
+        "isRepublished": {
+          "type": "boolean",
+          "description": "Indicates whether this event was previously published, such as a memo transaction that is published again during batch procesing."
+        },
+        "originalEventId": {
+          "type": "string",
+          "description": "Optional - Original event id that is being republished"
+        },
+        "linkedEventId": {
+          "type": "string",
+          "description": "Optional - Identifier to link related events together. This should only be populated when publishing a related event."
+        },
+        "publisher": {
+          "$ref": "#/definitions/headerPublisherInfo"
+        },
+        "encryption": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/headerEncryptionInfo"
+          },
+          "description": "List of objects containing the encryption data"
+        }
+      },
+      "required": [
+        "id",
+        "organization",
+        "eventType",
+        "eventCode",
+        "operationType",
+        "eventDateTime",
+        "eventVersion"
+      ]
+    },
+    "headerEncryptionInfo": {
+      "type": "object",
+      "description": "Object containing the encryption data information",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Field info"
+        },
+        "encryptType": {
+          "type": "string",
+          "description": "Encryption type",
+          "enum": [
+            "BIN_Internal",
+            "Binary_Internal",
+            "Card_Internal",
+            "CustomText_Internal",
+            "GenericText_Internal",
+            "GenericText_Trailing4_Internal",
+            "SSN_Internal"
+          ]
+        }
+      },
+      "required": [
+        "field",
+        "encryptType"
+      ]
+    },
+    "headerOrganization": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of organization",
+          "enum": [
+            "ABA",
+            "DUNS",
+            "Fiserv"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "Value that identifies the organization"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "headerPublisherInfo": {
+      "type": "object",
+      "description": "Object that contains publisher information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Instance identifier for the particular publisher.  Used for alerting to determine which particular instance raised the event"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the publisher, such as the Fiserv provider name",
+          "example": [
+            "Premier",
+            "Signature",
+            "Portico"
+          ]
+        },
+        "channel": {
+          "type": "string",
+          "description": "Identifies the channel that originated the event",
+          "enum": [
+            "ACH",
+            "BackOffice",
+            "Batch",
+            "BusinessOnline",
+            "DepositLine",
+            "EFT",
+            "FOS",
+            "Internet",
+            "Mobile",
+            "NOW",
+            "Other",
+            "Phone",
+            "PositivePay",
+            "RetailOnline",
+            "System",
+            "Teller",
+            "Wire"
+          ]
+        },
+        "device": {
+          "$ref": "#/definitions/headerDevice"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "channel"
+      ]
+    },
+    "headerDevice": {
+      "type": "object",
+      "properties": {
+        "OS": {
+          "type": "string",
+          "description": "Operating system of the initiating device",
+          "example": [
+            "IOS",
+            "Android"
+          ]
+        },
+        "OSVersion": {
+          "type": "string",
+          "description": "Operating system version of the initiating device",
+          "example": [
+            "14.4.2",
+            "28"
+          ]
+        },
+        "location": {
+          "$ref": "#/definitions/headerDeviceLocation"
+        },
+        "IPAddress": {
+          "type": "string",
+          "description": "A unique string of characters that identifies the initiating device using the Internet Protocol to communicate over a network"
+        },
+        "uniqueIdentifier": {
+          "type": "string",
+          "description": "Unique identifier of the initiating device",
+          "example": [
+            "10B38050-57FC-42F7-A6DC-61DB503BC65C"
+          ]
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the initiating device"
+        }
+      }
+    },
+    "headerDeviceLocation": {
+      "type": "object",
+      "description": "Location of the initiating device",
+      "properties": {
+        "latitude": {
+          "type": "string",
+          "description": "The angular distance of a place north or south of the earth's equator, or of a celestial object north or south of the celestial equator, usually expressed in degrees and minutes.",
+          "format": "float"
+        },
+        "longitude": {
+          "type": "string",
+          "description": "The angular distance of a place east or west of the meridian at Greenwich, England, or west of the standard meridian of a celestial object, usually expressed in degrees and minutes.",
+          "format": "float"
+        }
+      }
+    },
+    "card": {
+      "type": "object",
+      "description": "Object containing Card data",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Full card number as it appears on the card"
+        },
+        "sequenceNumber": {
+          "type": "string",
+          "description": "A one-digit suffix that identifies multiple cards for different parties",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of card being described",
+          "enum": [
+            "ATM",
+            "Credit",
+            "Debit",
+            "Prepaid",
+            "Rewards",
+            "Virtual"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Used to indicate the status of the card;",
+          "enum": [
+            "Active",
+            "Inactive"
+          ]
+        },
+        "detailStatus": {
+          "type": "string",
+          "description": "Indicates the detailed status of the card;",
+          "enum": [
+            "Active",
+            "Closed",
+            "Damaged",
+            "Expired",
+            "HotCard",
+            "Inactive",
+            "InquiryOnly",
+            "InsufficientFunds",
+            "Issued",
+            "Locked",
+            "Lost",
+            "Misused",
+            "New",
+            "Preactivated",
+            "Restricted",
+            "Revoked",
+            "Stolen"
+          ]
+        },
+        "nickname": {
+          "type": "string",
+          "description": "User defined name of card"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the card",
+          "example": [
+            "Visa Gold"
+          ]
+        },
+        "expiration": {
+          "type": "string",
+          "description": "Month and Year the card expires",
+          "format": "MM-YYYY",
+          "example": [
+            "10-2021"
+          ]
+        },
+        "embossedNameOne": {
+          "type": "string",
+          "description": "First name as it appears on the physical card"
+        },
+        "embossedNameTwo": {
+          "type": "string",
+          "description": "Second name as it appears on physical card"
+        },
+        "issuedDate": {
+          "type": "string",
+          "description": "Date the card was issued",
+          "format": "date"
+        },
+        "ISO": {
+          "type": "string",
+          "description": "ISO/BIN number associated with cards"
+        },
+        "limitStrategyCode": {
+          "type": "string",
+          "description": "The code for the limit strategy, eg. VIP"
+        },
+        "openDate": {
+          "type": "string",
+          "description": "Date on which the card record was opened",
+          "format": "date"
+        },
+        "closedDate": {
+          "type": "string",
+          "description": "Date the card was closed",
+          "format": "date"
+        },
+        "isPrimaryOwner": {
+          "type": "boolean",
+          "description": "Indicates if this is the primary owner (true) or not (false)"
+        },
+        "productIdentification": {
+          "type": "string",
+          "description": "Identifier for the related card Product"
+        },
+        "rewardsProgramNumber": {
+          "type": "string",
+          "description": "Unique identifier for the card rewards program as defined by the bank or credit union"
+        },
+        "portfolioNumber": {
+          "type": "string",
+          "description": "Unique identifier for the household"
+        },
+        "lastUpdateDateTime": {
+          "type": "string",
+          "description": "Date/time of last maintenance to the card",
+          "format": "date-time"
+        },
+        "lastActivityDateTime": {
+          "type": "string",
+          "description": "Date/time of last activity",
+          "format": "date-time"
+        },
+        "reissueDate": {
+          "type": "string",
+          "description": "Date the card was re-issued",
+          "format": "date"
+        },
+        "priorExpiration": {
+          "type": "string",
+          "description": "Month and Year the card previously expired",
+          "format": "MM-YYYY"
+        },
+        "statusChangeDateTime": {
+          "type": "string",
+          "description": "Date/time the card status changed",
+          "format": "date-time"
+        },
+        "activatedDate": {
+          "type": "string",
+          "description": "Date the card was activated",
+          "format": "date"
+        },
+        "activatedChannel": {
+          "type": "string",
+          "description": "Method through which the card was activated",
+          "enum": [
+            "ATM",
+            "Branch",
+            "IVR",
+            "Online"
+          ]
+        },
+        "pinOffset": {
+          "type": "string",
+          "description": "Offset of the PIN"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language code; ISO-639-1"
+        },
+        "issuedCount": {
+          "type": "integer",
+          "description": "Number of physical cards issued by number and sequenceNumber"
+        },
+        "isReissued": {
+          "type": "boolean",
+          "description": "Has the card been re-issued (true) or not (false). When this is true and isAUSEnabled is true, then the .card.previousCard object is required"
+        },
+        "isPersonal": {
+          "type": "boolean",
+          "description": "Is this card for personal  use (true) or commercial (false)"
+        },
+        "isAUSEnabled": {
+          "type": "boolean",
+          "description": "Is the Account Updater Services option (for automatic updates to all merchants) enabled for the card (true) or not (false). When this is true and isReissued is true, the .card.previousCard object is required"
+        },
+        "isInstantIssue": {
+          "type": "boolean",
+          "description": "Is this card an instant issue card (true) or not (false). When this is true, then .issuedDate, .activatedDate and .activatedChannel are required"
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accounts"
+          },
+          "minItems": 1
+        },
+        "address": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/address"
+          }
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fees"
+          }
+        },
+        "image": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/image"
+          },
+          "description": "Images of the associated card"
+        },
+        "industryLocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/industryLocks"
+          }
+        },
+        "limits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/limits"
+          },
+          "minItems": 1
+        },
+        "order": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/order"
+          },
+          "description": "List of orders associated to the card",
+          "maxItems": 2
+        },
+        "party": {
+          "$ref": "#/definitions/party"
+        },
+        "previousCard": {
+          "$ref": "#/definitions/previousCard"
+        },
+        "security": {
+          "$ref": "#/definitions/security"
+        },
+        "travelAlerts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/travelAlerts"
+          }
+        },
+        "usage": {
+          "$ref": "#/definitions/usage"
+        }
+      },
+      "required": [
+        "number",
+        "detailStatus",
+        "expiration",
+        "embossedNameOne",
+        "ISO",
+        "accounts",
+        "address",
+        "limits",
+        "party"
+      ]
+    },
+    "accounts": {
+      "type": "object",
+      "description": "Accounts associated to the card",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Actual account number as defined by the bank or credit union"
+        },
+        "detailType": {
+          "type": "string",
+          "description": "Detailed account type",
+          "enum": [
+            "Brokerage",
+            "CertificateOfDeposit",
+            "Checking",
+            "Club",
+            "Commercial",
+            "Construction",
+            "Consumer",
+            "CreditCard",
+            "DemandDepositLoan",
+            "Escrow",
+            "FlexibleSpending",
+            "FloorPlan",
+            "HealthSavings",
+            "HomeEquity",
+            "HomeEquityLineOfCredit",
+            "Installment",
+            "Lease",
+            "Loan",
+            "LineOfCredit",
+            "MoneyMarket",
+            "Mortgage",
+            "Passbook",
+            "Personal",
+            "PortfolioRelationship",
+            "Retirement",
+            "Savings",
+            "ShareDraft",
+            "Student"
+          ]
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "description": "Defines the order of the accounts by Account Type, eg. 1 = Primary Savings, 2 = Secondary Savings"
+        },
+        "transactionRestrictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transactionRestrictions"
+          },
+          "description": "Monetary transaction restrictions"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Indicates whether the account is active (true) or not (false)"
+        },
+        "nickname": {
+          "type": "string",
+          "description": "User defined name of account"
+        }
+      },
+      "required": [
+        "number",
+        "detailType",
+        "isActive"
+      ]
+    },
+    "transactionRestrictions": {
+      "type": "string",
+      "enum": [
+        "All",
+        "Credit",
+        "CrossTransfer",
+        "Debit",
+        "Deposit",
+        "Inquiry",
+        "POS",
+        "Withdrawal"
+      ]
+    },
+    "address": {
+      "type": "object",
+      "description": "Addresses associated to the card",
+      "properties": {
+        "reference": {
+          "$ref": "#/definitions/reference"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of address",
+          "enum": [
+            "Account",
+            "Address",
+            "Card",
+            "Party"
+          ]
+        },
+        "number": {
+          "type": "string",
+          "description": "Reference number that uniquely identifies the associated object as specified by the Type field. Can be a composite key."
+        }
+      },
+      "required": [
+        "type",
+        "number"
+      ]
+    },
+    "fees": {
+      "type": "object",
+      "description": "Fees on the associated card",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of fee",
+          "enum": [
+            "Annual",
+            "Card",
+            "SemiAnnual",
+            "Transaction",
+            "Quarterly",
+            "Monthly"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Fee description"
+        },
+        "amount": {
+          "type": "number",
+          "format": "currency",
+          "description": "Fee amount"
+        },
+        "isWaived": {
+          "type": "boolean",
+          "description": "Whether the fee is waived (true) or not (false)"
+        },
+        "nextAssessmentDate": {
+          "type": "string",
+          "description": "The date the fee will be charged",
+          "format": "date"
+        },
+        "lastWaivedDate": {
+          "type": "string",
+          "description": "Date of the last waived fee",
+          "format": "date"
+        }
+      },
+      "required": [
+        "type",
+        "amount"
+      ]
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of image",
+          "enum": [
+            "Stock",
+            "Photo",
+            "Signature"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "The URI link to the image"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "industryLocks": {
+      "type": "object",
+      "description": "Merchant/Industry locks on the associated card",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of industry lock;",
+          "enum": [
+            "NAICS",
+            "SIC"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "description": "Lock code"
+        },
+        "subCode": {
+          "type": "string",
+          "description": "Sub code"
+        },
+        "fromDate": {
+          "type": "string",
+          "description": "From date",
+          "format": "date"
+        },
+        "toDate": {
+          "type": "string",
+          "description": "To date",
+          "format": "date"
+        }
+      },
+      "required": [
+        "type",
+        "code"
+      ]
+    },
+    "limits": {
+      "type": "object",
+      "description": "Limits on the associated card",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of limit",
+          "enum": [
+            "Cycle",
+            "Daily",
+            "ThreeDay",
+            "Transaction"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "description": "Type of limit;",
+          "enum": [
+            "ATM",
+            "Combined",
+            "POS",
+            "POSPin",
+            "POSSignature"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "description": "Action associated with limit",
+          "enum": [
+            "Advance",
+            "Credit",
+            "Debit",
+            "Deposit",
+            "Inquiry",
+            "Purchase",
+            "Transfer",
+            "Withdrawal"
+          ]
+        },
+        "amount": {
+          "type": "number",
+          "format": "currency",
+          "description": "Limit amount"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Maximum number allowed"
+        },
+        "isOnline": {
+          "type": "boolean",
+          "description": "Whether the limit applies to online types (true) or offline types (false)"
+        },
+        "fromDate": {
+          "type": "string",
+          "description": "From date",
+          "format": "date"
+        },
+        "toDate": {
+          "type": "string",
+          "description": "To date",
+          "format": "date"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "order": {
+      "type": "object",
+      "description": "Order associated to the card",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of Order",
+          "enum": [
+            "New",
+            "Reissue",
+            "PinMailer"
+          ]
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of orders"
+        },
+        "isExpedited": {
+          "type": "boolean",
+          "description": "Indicates whether this order is expedited (true) or not (false)"
+        },
+        "deliveryAddress": {
+          "$ref": "#/definitions/deliveryAddress"
+        }
+      },
+      "required": [
+        "type",
+        "deliveryAddress"
+      ]
+    },
+    "deliveryAddress": {
+      "type": "object",
+      "description": "Delivery address of the order",
+      "properties": {
+        "lineOne": {
+          "type": "string",
+          "description": "First line of address"
+        },
+        "lineTwo": {
+          "type": "string",
+          "description": "Second line of address"
+        },
+        "city": {
+          "type": "string",
+          "description": "City associated with address"
+        },
+        "stateProvince": {
+          "type": "string",
+          "description": "State/province associated with address"
+        },
+        "country": {
+          "type": "string",
+          "description": "Name of country associated with address",
+          "example": [
+            "Sweden"
+          ]
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code associated with address"
+        }
+      },
+      "required": [
+        "lineOne",
+        "postalCode"
+      ]
+    },
+    "party": {
+      "type": "object",
+      "description": "Party associated to the card",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Identifier of the original card owner"
+        },
+        "preferredContactMethod": {
+          "type": "string",
+          "description": "Preferred contact method",
+          "enum": [
+            "Email",
+            "Phone",
+            "SMS"
+          ]
+        },
+        "taxNumberType": {
+          "type": "string",
+          "description": "Type of tax identifier;",
+          "enum": [
+            "EIN",
+            "ITIN",
+            "SSN"
+          ]
+        },
+        "taxNumber": {
+          "type": "string",
+          "description": "Tax identifier"
+        },
+        "birthDate": {
+          "type": "string",
+          "description": "Date of Birth",
+          "format": "date"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the party; not applicable for businesses and entities"
+        },
+        "middleName": {
+          "type": "string",
+          "description": "Middle name of the party; not applicable for businesses and entities"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the party; not applicable for businesses and entities"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix of the party; not applicable for businesses and entities"
+        },
+        "suffix": {
+          "type": "string",
+          "description": "Suffix of the party; not applicable for businesses and entities"
+        },
+        "businessName": {
+          "type": "string",
+          "description": "Name of business; not applicable for individuals"
+        },
+        "email": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/email"
+          },
+          "description": "List of Email objects associated to the .card.party object"
+        },
+        "phone": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/phone"
+          },
+          "description": "List of Phone objects associated to the .card.party object"
+        }
+      },
+      "required": [
+        "number"
+      ]
+    },
+    "email": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of email address",
+          "enum": [
+            "Business",
+            "Personal",
+            "Work"
+          ]
+        },
+        "address": {
+          "type": "string",
+          "description": "Email address",
+          "format": "email"
+        },
+        "isPreferred": {
+          "type": "boolean",
+          "description": "Is this email the preferred form of contact"
+        },
+        "contactAllowed": {
+          "type": "string",
+          "description": "Whether or not contact is allowed for the associated form of communication",
+          "enum": [
+            "Undefined",
+            "Yes",
+            "No"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "address",
+        "contactAllowed"
+      ]
+    },
+    "phone": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of phone number;",
+          "enum": [
+            "Home",
+            "Work",
+            "Mobile",
+            "Fax",
+            "Pager",
+            "Other"
+          ]
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Phone country code. Numeric values only."
+        },
+        "number": {
+          "type": "string",
+          "description": "Phone number. Numeric values only."
+        },
+        "extension": {
+          "type": "string",
+          "description": "Phone extension. Numeric values only."
+        },
+        "isPreferred": {
+          "type": "boolean",
+          "description": "Is this phone number the preferred form of contact"
+        },
+        "contactAllowed": {
+          "type": "string",
+          "description": "Whether or not contact is allowed for the associated form of communication",
+          "enum": [
+            "Undefined",
+            "Yes",
+            "No"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "number",
+        "contactAllowed"
+      ]
+    },
+    "previousCard": {
+      "type": "object",
+      "description": "Object describing the previous card, eg. Re-issue scenario",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Full card number as it appears on the card"
+        },
+        "sequenceNumber": {
+          "type": "string",
+          "description": "A one-digit suffix that identifies multiple cards for different parties"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of card being described",
+          "enum": [
+            "ATM",
+            "Credit",
+            "Debit",
+            "Prepaid",
+            "Rewards",
+            "Virtual"
+          ]
+        },
+        "detailStatus": {
+          "type": "string",
+          "description": "Indicates the detailed status of the card;",
+          "enum": [
+            "Active",
+            "Closed",
+            "Damaged",
+            "Expired",
+            "HotCard",
+            "Inactive",
+            "InquiryOnly",
+            "InsufficientFunds",
+            "Issued",
+            "Locked",
+            "Lost",
+            "Misused",
+            "New",
+            "Preactivated",
+            "Restricted",
+            "Revoked",
+            "Stolen"
+          ]
+        },
+        "expiration": {
+          "type": "string",
+          "description": "Month and Year the card expires",
+          "format": "MM-YYYY"
+        },
+        "issuedDate": {
+          "type": "string",
+          "description": "Date the physical card was issued",
+          "format": "date"
+        },
+        "isAUSEnabled": {
+          "type": "boolean",
+          "description": "Is the Account Updater Services option (for automatic updates to all merchants) enabled for the card (true) or not (false)"
+        }
+      },
+      "required": [
+        "number",
+        "expiration"
+      ]
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of security",
+          "enum": [
+            "ReferenceCode",
+            "MothersMaidenName",
+            "CVV"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "Value for the type of Security specified"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "travelAlerts": {
+      "type": "object",
+      "description": "Travel Alerts on the associated card",
+      "properties": {
+        "countryCode": {
+          "type": "string",
+          "description": "Country code: ISO 3166-1 Alpha 2 format, eg. US"
+        },
+        "stateProvince": {
+          "type": "string",
+          "description": "State/province associated with address: ISO 3166-2 standard format, but only include values after the dash"
+        },
+        "fromDate": {
+          "type": "string",
+          "description": "From date",
+          "format": "date"
+        },
+        "toDate": {
+          "type": "string",
+          "description": "To date",
+          "format": "date"
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "description": "List of usages associated to the card. Either frequency, type or action are required and either count or amount.",
+      "properties": {
+        "frequency": {
+          "type": "string",
+          "description": "Usage frequency",
+          "enum": [
+            "Daily",
+            "Last",
+            "MTD",
+            "PriorMonth",
+            "PriorYear",
+            "Total",
+            "YTD"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of Usage",
+          "enum": [
+            "Access",
+            "ATM",
+            "CardsInUse",
+            "CardUsed",
+            "Foreign",
+            "ForeignFees",
+            "Offline",
+            "OnUs",
+            "Pin",
+            "POS",
+            "Signature",
+            "SignaturePOS",
+            "Usage"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "description": "Type of Usage action",
+          "enum": [
+            "Advance",
+            "Authorized",
+            "Credits",
+            "Debits",
+            "Deposit",
+            "Fee",
+            "Inquiry",
+            "Payment",
+            "Purchase",
+            "Transfer",
+            "Waived",
+            "Withdrawal"
+          ]
+        },
+        "count": {
+          "type": "integer",
+          "description": "Maximum number allowed"
+        },
+        "amount": {
+          "type": "number",
+          "format": "currency",
+          "description": "Usage amount"
+        },
+        "lastDateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  }
+}

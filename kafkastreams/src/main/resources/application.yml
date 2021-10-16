@@ -2,10 +2,12 @@ spring:
    cloud:
       stream:
          bindings:
-            input-channel-1:
+            process-in-0:
                destination: cardservices
-            output-channel-1:
+            process-out-0:
                destination: banksolutions
+#            output-in-0:
+#               destination: banksolutions
          kafka:
             streams:
                binder:

@@ -13,9 +13,9 @@ import com.rhslearnings.kafka.json.producer.data.model.CardInfo;
 import lombok.extern.log4j.Log4j2;
 import om.rhs.example.kafkastreams.data.model.Notification;
 
-@Service
-@Log4j2
-@EnableBinding(MyKafkaListenerBinding.class)
+//@Service
+//@Log4j2
+//@EnableBinding(MyKafkaListenerBinding.class)
 public class MyKafkaListenerService {
 	
 	@Autowired
@@ -27,7 +27,8 @@ public class MyKafkaListenerService {
 		
 		input.foreach((k,v) -> System.out.println(String.format("Topic: ************ From CardServices *********, value: %s",v + "\n\n") ));
 		
-		KStream<String, Notification> stream = input.filter( (k,v) -> v.getEventType().equalsIgnoreCase("CARDINFO") ).mapValues(v -> record.getNotification(v));
+		KStream<String, Notification> stream = input.filter( (k,v) -> 
+		v.getEventType().equalsIgnoreCase("CARDINFO") ).mapValues(v -> record.getNotification(v));
 	
 		stream.foreach((k,v) -> System.out.println(String.format("Topic: ************ Notifications *********, value: %s ",v + "\n") ));
 		
