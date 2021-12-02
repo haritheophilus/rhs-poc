@@ -70,7 +70,7 @@
 					<configuration>
 						<url>http://<host-ip></host-ip>:8080/manager/text</url>
 						<server>aws</server>
-						<path>/maven-test</path>
+						<path>/test</path>
 					</configuration>
 				</plugin>
 			</plugins>
